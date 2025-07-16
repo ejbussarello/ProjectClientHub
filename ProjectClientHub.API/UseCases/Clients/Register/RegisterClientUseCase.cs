@@ -1,5 +1,6 @@
 ﻿using ProjectClientHub.Communication.Requests;
 using ProjectClientHub.Communication.Responses;
+using ProjectClientHub.Exceptions.ExceptionsBase;
 
 namespace ProjectClientHub.API.UseCases.Clients.Register;
 
@@ -14,7 +15,9 @@ public class RegisterClientUseCase
 
         if (result.IsValid == false)
         {
-            throw new ArgumentException("ERRO NOS DADOS RECEBIDOS");
+            var errors = result.Errors.Select(failure => failure.ErrorMessage).ToList(); 
+
+            throw new ErrorOnValidationException(errors);
         }
 
         // CONTINUA A REGRA DE NEGOCIO
