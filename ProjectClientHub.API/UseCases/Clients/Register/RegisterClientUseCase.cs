@@ -12,6 +12,13 @@ public class RegisterClientUseCase
 
         var result = validator.Validate(request);
 
+        if (result.IsValid == false)
+        {
+            throw new ArgumentException("ERRO NOS DADOS RECEBIDOS");
+        }
+
+        // CONTINUA A REGRA DE NEGOCIO
+
         return new ResponseClientJson();
 
     }
