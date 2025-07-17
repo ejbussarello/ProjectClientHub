@@ -2,7 +2,6 @@
 using ProjectClientHub.API.UseCases.Clients.Register;
 using ProjectClientHub.Communication.Requests;
 using ProjectClientHub.Communication.Responses;
-using ProjectClientHub.Exceptions.ExceptionsBase;
 
 namespace ProjectClientHub.API.Controllers
 {
@@ -15,23 +14,11 @@ namespace ProjectClientHub.API.Controllers
         [ProducesResponseType(typeof(ResponseErrorMessageJson), StatusCodes.Status400BadRequest)]
         public IActionResult Register([FromBody] RequestClientJson request)
         {
-            try
-            {
-                var useCase = new RegisterClientUseCase();
-
-                var response = useCase.Execute(request);
-
-                return Created(string.Empty, response);
-            }
-            catch (ProjectClientHubException ex) 
-            {
-                var errors = ex.GetErros();
-                return BadRequest(new ResponseErrorMessageJson(errors));  
-            }
-            catch 
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new ResponseErrorMessageJson("ERRO DESCONHECIDO"));
-            }
+            var useCase = new RegisterClientUseCase();
+            var response = useCase.Execute(request);
+            
+            return Created(string.Empty, response);
+            
         }
 
         [HttpPut]

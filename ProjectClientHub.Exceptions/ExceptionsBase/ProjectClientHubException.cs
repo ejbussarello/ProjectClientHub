@@ -1,4 +1,6 @@
-﻿namespace ProjectClientHub.Exceptions.ExceptionsBase
+﻿using System.Net;
+
+namespace ProjectClientHub.Exceptions.ExceptionsBase
 {
     public abstract class ProjectClientHubException : SystemException
     {
@@ -8,5 +10,6 @@
         }
 
         public abstract List<string> GetErros();
+        public abstract HttpStatusCode GetHttpStatusCode();
     }
 }
