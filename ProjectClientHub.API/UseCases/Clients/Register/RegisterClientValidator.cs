@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using ProjectClientHub.Communication.Requests;
-using ProjectClientHub.Communication.Responses;
 
 namespace ProjectClientHub.API.UseCases.Clients.Register
 {
@@ -10,7 +9,7 @@ namespace ProjectClientHub.API.UseCases.Clients.Register
         public RegisterClientValidator()
         {
             RuleFor(client => client.Name).NotEmpty().WithMessage("O nome não pode ser vazio.");
-            RuleFor(client => client.Name).EmailAddress().WithMessage("O e-mail não é válido.");
+            RuleFor(client => client.Email).EmailAddress().WithMessage("O e-mail não é válido.");
         }
     }
 }
